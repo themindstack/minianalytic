@@ -16,6 +16,7 @@ export interface ProcessedData extends PostData {
   session: string;
   ip: string;
   userAgent: string;
+  time: Date;
 }
 
 const SESSION_COOKIE = "ma_sid";
@@ -30,6 +31,7 @@ export const collect = appFactory.createHandlers(async (c) => {
 
   const data: ProcessedData = {
     ...processTextData(raw),
+    time: new Date(),
     session,
     ip: getClientIp(c),
     userAgent: c.req.header("user-agent") ?? "",
@@ -41,8 +43,9 @@ export const collect = appFactory.createHandlers(async (c) => {
 });
 
 async function appendTsv(data: ProcessedData): Promise<void> {
-  // session, user, ip, userAgent, type, page
+  // time, session, user, ip, userAgent, type, page
   const row = [
+    data.time.getTime().toString(),
     data.session,
     data.user ?? "",
     data.ip,
