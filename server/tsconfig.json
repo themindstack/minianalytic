@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    //    "target": "esnext",
+    //    "moduleResolution": "nodenext",
+    "allowImportingTsExtensions": false,
+    "strict": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx",
+    "paths": {
+      "~services/*": ["./src/services/*"]
+    }
+  }
+}
