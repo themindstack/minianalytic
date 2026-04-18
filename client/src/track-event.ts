@@ -1,9 +1,3 @@
-interface ImportMetaEnv {}
-
-interface ImportMeta {
-  readonly env: ImportMetaEnv;
-}
-
 export interface EventData {
   user?: string;
   type: "page_load" | "enter";
@@ -14,7 +8,7 @@ export function event(data: EventData) {
   if (import.meta.env.VITE_TRACKER_API_URL) {
     navigator.sendBeacon(
       import.meta.env.VITE_TRACKER_API_URL,
-      [data.user ?? "", data.type ?? "", data.page].join(","),
+      [data.user ?? "", data.type ?? "", data.page].join("\n"),
     );
     console.log("Tracked", data);
   } else {

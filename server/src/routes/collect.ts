@@ -101,7 +101,7 @@ function getClientIp(c: Context): string {
 }
 
 function processTextData(data: string): PostData {
-  const [user, type, page] = data.split(",", 3);
+  const [user, type, page] = data.split("\n", 3);
   return {
     user,
     type,
