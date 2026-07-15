@@ -2,9 +2,12 @@ import * as process from "node:process";
 import { logger } from "~services/logger";
 import { appFactory } from "./app.factory";
 import { routes } from "./routes";
+import { trimTrailingSlash } from "hono/trailing-slash";
 
 (async function main() {
   const app = appFactory.createApp();
+
+  app.use(trimTrailingSlash());
 
   app.post("/collect/v0", ...routes.collect);
 
