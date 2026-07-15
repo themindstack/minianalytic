@@ -3,11 +3,14 @@ import { logger } from "~services/logger";
 import { appFactory } from "./app.factory";
 import { routes } from "./routes";
 import { trimTrailingSlash } from "hono/trailing-slash";
+import { logger as loggerMiddleware } from "hono/logger";
 
 (async function main() {
   const app = appFactory.createApp();
 
   app.use(trimTrailingSlash());
+
+  app.use(loggerMiddleware());
 
   app.post("/collect/v0", ...routes.collect);
 
