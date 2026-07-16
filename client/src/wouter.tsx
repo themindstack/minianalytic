@@ -2,11 +2,12 @@ import { useEffect } from "react";
 import { useLocation } from "wouter";
 import { event } from "./track-event";
 
-export function WouterTracker() {
+export function WouterTracker({ user }: { user: string | undefined }) {
   const [location] = useLocation();
 
   useEffect(() => {
     event({
+      user: user ?? "",
       type: "page_load",
       page: location,
     });
