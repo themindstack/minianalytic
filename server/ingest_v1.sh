@@ -74,7 +74,7 @@ ingest_one_file() {
 
 find "$STORAGE_DIR" \
   -type f \
-  \( \( -name '*.tsv' -o -name '*.tmp' \) -a -mmin +1440 \) \
+  \( \( -name '*.tsv' -o -name '*.tmp' \) -a -mmin +360 \) \
   -print0 | while IFS= read -r -d '' file; do
   ingest_one_file "$file"
 done
