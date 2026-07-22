@@ -68,7 +68,8 @@ ingest_one_file() {
     mv "$claimed_file" "$done_file"
     echo "Ingested: $claimed_file -> $done_file"
   else
-    echo "Insert failed, keeping tmp for retry: $claimed_file" >&2
+    mv "$claimed_file" "$file"
+    echo "Insert failed, reverted file name" >&2
   fi
 }
 
