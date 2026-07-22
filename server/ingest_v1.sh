@@ -73,6 +73,14 @@ ingest_one_file() {
   fi
 }
 
-find "$STORAGE_DIR" -type f -name '*.tsv' -a -cmin +60 -print0 | while IFS= read -r -d '' file; do
-  ingest_one_file "$file"
-done
+if [ "$#" -eq 0 ]; then
+  find "$STORAGE_DIR" -type f -name '*.tsv' -a -cmin +60 -print0 | while IFS= read -r -d '' file; do
+    ingest_one_file "$file"
+  done
+else
+  for arg in "$@"
+  do
+    ingest_one_file "$arg"
+  done
+fi
+
